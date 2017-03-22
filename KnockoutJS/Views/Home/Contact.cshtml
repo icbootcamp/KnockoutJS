@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<button class="btn btn-success" data-bind="click: addRow">Add</button>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>&nbsp</th>
+    </tr>
+    <tbody data-bind="foreach: motorArray">
+        <tr>
+            <td data-bind="text: Id"></td>
+            <td data-bind="text: FirstName"></td>
+            <td><button class="btn btn-primary" data-bind="click: editData">Edit</button></td>
+        </tr>
+    </tbody>
+
+
+
+</table>
+
+<script>
+
+    function listClass(data) {
+        var self = this;
+        self.Id = ko.observable(data.Id);
+        self.FirstName = ko.observable(data.FirstName);
+    }
+
+    function ViewModel() {
+        var self = this;
+        self.motorArray = ko.observableArray([]);
+        self.firstName = ko.observable("bob de bob bob");
+
+        $.ajax({
+            url: '/Home/GetAjax',
+            type: 'get',
+            success: function (result) {
+                
+                for (i = 0; i < result.length; i++) {
+                    
+                    self.motorArray.push(new listClass(result[i]));
+                }
+            }
+        })
+
+        self.addRow = function () {
+            self.motorArray.push(new listClass({ Id: 34, FirstName: 'Bob is a Dude' }));
+            console.log(self.motorArray()[0].FirstName())
+        }
+
+        self.editData = function (item,event) {
+            console.log(item.FirstName())
+            self.firstName(item.FirstName())
+            $("#craigs-model").modal("show");
+        }
+    }
+
+    ko.applyBindings(ViewModel)
+
+
+</script>

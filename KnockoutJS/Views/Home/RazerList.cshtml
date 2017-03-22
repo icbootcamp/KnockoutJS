@@ -1,0 +1,21 @@
+﻿@model List<KnockoutJS.Models.PersonViewModel>
+@{
+    ViewBag.Title = "RazerList";
+    Layout = null;
+}
+
+<h2>RazerList</h2>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Id</th>
+        <th>First Name</th>
+    </tr>
+    @foreach (var l in Model)
+    {
+    <tr>
+        <td>@l.Id</td>
+        <td>@l.FirstName</td>
+    </tr>
+    }
+</table>

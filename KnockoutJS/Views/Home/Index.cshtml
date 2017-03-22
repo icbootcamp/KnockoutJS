@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="jquery">
+
+
+
+</div>
+
+<script>
+    $.ajax({
+        url: '/Home/RazerList',
+        type: 'get',
+        success: function (html) {
+            $('#jquery').html(html);
+        }
+    })
+</script>
