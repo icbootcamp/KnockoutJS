@@ -32,6 +32,7 @@ namespace KnockoutJS.Controllers
 
         public ActionResult RazerList()
         {
+
             var personList = db.People.Select(x => new PersonViewModel
             {
                 Id = x.PersonId,
